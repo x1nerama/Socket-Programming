@@ -99,3 +99,32 @@ int main(void) {
        return 0;
 }
 ```
+
+&nbsp;
+
+## **errno.h**
+
+errno.h, hata mesajlarını ekrana bastırmak için gerekli makroların tanımlı olduğu bir header dosyasıdır. 
+
+Eğer program içerisinde bir hata algılanırsa bazı library functions (kütühane fonksiyonları) tarafından errno'a bir değer atanır. Program başladığında sakladığı değer sıfırdır. 
+
+Library Functions yalnızca sıfırdan büyük değerler depolar. Aynı zamanda bir hata algılasar da algılamasalar da içerisindeki değerler dönmeden önce değerleri değişebilir. Genellikle bu kütüphanelere, pointer tarafından döndüren değer NULL ve tamsayı döndüren işlevler için -1 gibi özel değerler döndürerek hata mesajı algılanır.
+
+Bununla ilgili aşağıda örnek verilmiştir:
+
+```c
+#include <stdio.h>
+#include <error.h>
+#include <sys/types.h>
+
+//windows ortamında yazılmıştır.
+
+void error(const char *msg) {
+
+      perror(msg);
+      exit(1);
+}
+```
+
+Yukarıdaki örnekten yola çıkarsak, eğer -1 sonucunda bir hata meydana gelirse öncelikle bu hata mesajı, fonksiyon içerisinde oluşturulan <strong> *msg </strong>
+pointer içerisine kaydedilecek ve **perror** fonksiyonu ile kaydedilen hata mesajı ekrana basılacaktır. 
